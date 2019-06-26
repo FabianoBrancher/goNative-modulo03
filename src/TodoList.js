@@ -14,7 +14,7 @@ const TodoList = ({ todos, addTodo, markAsCompleted }) => (
       <Text onPress={() => markAsCompleted(todo.id)} style={{ textDecorationLine: todo.completed ? 'line-through' : 'none' }} key={todo.id}>{todo.text}</Text>
     ))}
     <Button
-      title='Adicionar Todo'
+      title="Adicionar Todo"
       onPress={addTodo}
     />
 

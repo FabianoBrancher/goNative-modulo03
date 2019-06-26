@@ -1,45 +1,14 @@
-import { createStore } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
+import todos from './reducers/todos';
 
-const INITIAL_STATE = [
-  { id: 1, text: 'Fazer café', completed: false },
-  { id: 2, text: 'Estudar react-native', completed: true },
-  { id: 3, text: 'entender o redux', completed: false },
-];
-
-// Reducer
-function reducer(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case 'ADD_TODO':
-      return [
-        ...state,
-        {
-          id: Math.random(),
-          text: action.payload.text,
-          completed: false,
-        },
-      ];
-    case 'MARK_AS_COMPLETED':
-      return state.map(todo => (todo.id === action.payload.id
-        ? { ...todo, completed: !todo.completed }
-        : todo));
-    default:
-      return state;
-  }
-
-  // if (action.type === 'ADD_TODO') {
-  //   return [
-  //     ...state,
-  //     {
-  //       id: Math.random(),
-  //       text: action.text,
-  //       completed: false,
-  //     },
-  //   ];
-  // }
-
-}
+const composer = __DEV__
+  ? compose(
+    applyMiddleware(...[]),
+    console.tron.createEnhancer(),
+  )
+  : applyMiddleware(...[]);
 
 // Não pode ser criado vazio
-const store = createStore(reducer);
+const store = createStore(todos, composer);
 
 export default store;
