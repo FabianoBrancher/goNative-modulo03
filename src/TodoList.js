@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 const TodoList = ({ todos, dispatch }) => (
   <View style={{ flex: 1, backgroundColor: '#fff', justifyContent: 'center' }}>
     {todos.map(todo => (
-      <Text style={{ textDecorationLine: todo.completed ? 'line-through' : 'none' }} key={todo.id}>{todo.text}</Text>
+      <Text onPress={() => dispatch({ type: 'MARK_AS_COMPLETED', id: todo.id })} style={{ textDecorationLine: todo.completed ? 'line-through' : 'none' }} key={todo.id}>{todo.text}</Text>
     ))}
     <Button
       title='Adicionar Todo'

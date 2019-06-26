@@ -19,11 +19,9 @@ function reducer(state = INITIAL_STATE, action) {
         },
       ];
     case 'MARK_AS_COMPLETED':
-      return [
-        state.map(item => item.id === action.id),
-        { completed: true },
-      ];
-
+      return state.map(todo => (todo.id === action.id
+        ? { ...todo, completed: !todo.completed }
+        : todo));
     default:
       return state;
   }
