@@ -1,13 +1,17 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 
-// Preciso colocar sempre antes da importação do Store
 import '~/config/ReactotronConfig';
+// import '~/config/DevToolsConfig';
 
-import store from '~/store';
+import { Provider } from 'react-redux';
+import store from './store';
 
-import TodoList from '~/TodoList';
+import Routes from '~/routes';
 
-const App = () => <Provider store={store}><TodoList /></Provider>;
+const App = () => (
+  <Provider store={store}>
+    <Routes />
+  </Provider>
+);
 
 export default App;
