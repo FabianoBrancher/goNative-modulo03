@@ -7,6 +7,8 @@ import {
 
 import api from '~/services/api';
 
+import { navigate } from '~/services/navigation';
+
 import * as LoginActions from '~/store/actions/login';
 
 function* login(action) {
@@ -16,7 +18,7 @@ function* login(action) {
 
     yield put(LoginActions.loginSuccess(username));
 
-    // navigation.navigate('repositories');
+    navigate('repositories');
   } catch (error) {
     yield put(LoginActions.loginFailure());
   }
