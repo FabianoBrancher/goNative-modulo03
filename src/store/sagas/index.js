@@ -3,6 +3,7 @@ import {
   takeLatest,
   call,
   put,
+  select,
 } from 'redux-saga/effects';
 
 import api from '~/services/api';
@@ -10,6 +11,7 @@ import api from '~/services/api';
 import { navigate } from '~/services/navigation';
 
 import * as LoginActions from '~/store/actions/login';
+import * as RepositoriesActions from '~/store/actions/repositories';
 
 function* login(action) {
   try {
@@ -24,8 +26,20 @@ function* login(action) {
   }
 }
 
+function* loadRepositories() {
+  try {
+    const { username } = yield select(state => state.login);
+    const { data } = yield call(api.get, `/users/${username}/repos`);
+
+    yield put(RepositoriesActions.loadRepositoriesSuccess(data));
+  } catch (error) {
+    yield put(RepositoriesActions.loadRepositoriesFailure());
+  }
+}
+
 export default function* rootSaga() {
   return yield all([
     takeLatest('LOGIN_REQUEST', login),
+    takeLatest('LOAD_REPOSITORIES_REQUEST', loadRepositories),
   ]);
 }
