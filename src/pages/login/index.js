@@ -32,7 +32,7 @@ class Login extends Component {
     const { error, loading } = this.props;
     return (
       <Container>
-        {error && <Error>Usuário inexistente</Error>}
+        {error && <Error>Usuário inexistente.</Error>}
         <Input
           value={username}
           onChangeText={text => this.setState({ username: text })}
