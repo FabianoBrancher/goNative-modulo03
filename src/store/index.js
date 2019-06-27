@@ -1,16 +1,25 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import reducer from './reducers';
+import createSagaMiddleware from 'redux-saga';
+
+import rootReducer from './reducers';
+import rootSaga from './sagas';
+
+const middlewares = [];
+
+const sagaMiddleware = createSagaMiddleware();
+
+middlewares.push(sagaMiddleware);
 
 const composer = __DEV__
   ? compose(
-    applyMiddleware(...[]),
+    applyMiddleware(...middlewares),
     console.tron.createEnhancer(),
   )
-  : applyMiddleware(...[]);
+  : applyMiddleware(...middlewares);
 
 // Não pode ser criado vazio
-const store = createStore(reducer, composer);
+const store = createStore(rootReducer, composer);
 
-console.tron.log(store.getState());
+sagaMiddleware.run(rootSaga);
 
 export default store;
