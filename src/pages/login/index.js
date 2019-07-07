@@ -4,15 +4,14 @@ import { ActivityIndicator } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as LoginActions from '~/store/actions/login';
-import api from '~/services/api';
+import { Creators as LoginActions } from '~/store/ducks/login';
 
 import {
   Container,
   Input,
   Button,
   ButtonText,
-  Error
+  Error,
 } from './styles';
 
 class Login extends Component {
